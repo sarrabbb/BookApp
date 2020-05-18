@@ -14,7 +14,7 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "BookLibrary.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION =6;
 
     private static final String TABLE_NAME_1 = "my_library";
     private static final String COLUMN_ID = "_id";

@@ -13,4 +13,8 @@
     <string name="password">password</string>
     <string name="login">Login</string>
     <string name="username">Username</string>
+    <string-array name="usertype">
+        <item>user</item>
+        <item>admin</item>
+    </string-array>
 </resources>

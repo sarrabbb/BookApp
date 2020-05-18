@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 public class RegisterActivity extends AppCompatActivity {
 
     EditText username_input,useremail_input,password_input;
     Button register_button,tosigin_button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         username_input = findViewById(R.id.username_input2);
         useremail_input = findViewById(R.id.useremail_input);
         password_input = findViewById(R.id.password_input2);
+
 
         register_button = findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
