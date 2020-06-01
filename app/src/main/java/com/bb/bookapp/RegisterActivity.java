@@ -14,6 +14,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText username_input,useremail_input,password_input;
     Button register_button,tosigin_button;
+    Spinner spinnerRole;
 
 
     @Override
@@ -24,7 +25,9 @@ public class RegisterActivity extends AppCompatActivity {
         username_input = findViewById(R.id.username_input2);
         useremail_input = findViewById(R.id.useremail_input);
         password_input = findViewById(R.id.password_input2);
-
+        spinnerRole = findViewById(R.id.spinnerRole);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.usertype,R.layout.support_simple_spinner_dropdown_item);
+        spinnerRole.setAdapter(adapter);
 
         register_button = findViewById(R.id.register_button);
         register_button.setOnClickListener(new View.OnClickListener() {
@@ -33,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
                 MyDataBaseHelper myDB = new MyDataBaseHelper(RegisterActivity.this);
                 myDB.addUser(username_input.getText().toString().trim(),
                         useremail_input.getText().toString().trim(),
+                        spinnerRole.getSelectedItem().toString().trim(),
                         password_input.getText().toString().trim())
                 ;
                 finish();

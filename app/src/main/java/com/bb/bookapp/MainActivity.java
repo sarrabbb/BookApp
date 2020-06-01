@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
+
         add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
         void storeDataInArrays(){
             Cursor cursor = myDB.readAllData();
             if(cursor.getCount() == 0){
-//                empty_imageview.setVisibility(View.VISIBLE);
-//                no_data.setVisibility(View.VISIBLE);
                 Toast.makeText(this,"no data",Toast.LENGTH_SHORT).show();
             }else{
                 while (cursor.moveToNext()){
@@ -78,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
                     book_author.add(cursor.getString(2));
                     book_pages.add(cursor.getString(3));
                 }
-//                empty_imageview.setVisibility(View.GONE);
-//                no_data.setVisibility(View.GONE);
             }
         }
 

@@ -9,20 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:label="Sign In">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".RegisterActivity"
-            android:label="Sign up"/>
-
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Sign up" />
         <activity
             android:name=".UpdateActivity"
             android:label="Update book"
@@ -33,9 +31,14 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="Book Library">
+            android:label="Book Library" />
 
-        </activity>
+        <activity android:name=".UserActivity"
+            android:label="User Interface"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
+
     </application>
 
 </manifest>

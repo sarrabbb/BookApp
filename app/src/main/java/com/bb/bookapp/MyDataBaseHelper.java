@@ -14,7 +14,7 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "BookLibrary.db";
-    private static final int DATABASE_VERSION =6;
+    private static final int DATABASE_VERSION =7;
 
     private static final String TABLE_NAME_1 = "my_library";
     private static final String COLUMN_ID = "_id";
@@ -27,6 +27,7 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER_ID = "user_id";
     private static final String COLUMN_USER_EMAIL = "email";
     private static final String COLUMN_USERNAME = "username";
+    private static final String COLUMN_USER_ROLE = "role";
     private static final String COLUMN_PWD = "pwd";
 
 
@@ -40,6 +41,7 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
             " (" + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_USERNAME + " TEXT, " +
             COLUMN_USER_EMAIL + " TEXT, " +
+            COLUMN_USER_ROLE + " TEXT, " +
             COLUMN_PWD + " TEXT);";
 
     MyDataBaseHelper(@Nullable Context context) {
@@ -64,13 +66,14 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
 
 
 //    USERS
-    void addUser(String username, String email ,String pwd){
+    void addUser(String username, String email ,String role,String pwd){
         SQLiteDatabase db2 = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_USERNAME,username);
         values.put(COLUMN_USER_EMAIL,email);
+        values.put(COLUMN_USER_ROLE,role);
         values.put(COLUMN_PWD,pwd);
 
 
@@ -95,21 +98,37 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
 
     boolean  verifyUser( String username , String pwd ){
         SQLiteDatabase db = this.getReadableDatabase();
-
-//        Cursor mCursor = db.rawQuery("SELECT * FROM " + TABLE_NAME_2 +" WHERE username=? AND pwd=?", new String[]{username,pwd});
         Cursor mCursor = db.rawQuery("Select * from " + TABLE_NAME_2 +" where username=? and pwd = ?", new
                 String[]{username, pwd});
 
             if(mCursor.getCount() > 0)
             {
-//                Toast.makeText(context, "Logged in", Toast.LENGTH_SHORT).show();
                 return  true;
             }else{
-                //        Toast.makeText(context, "Failed to sign in", Toast.LENGTH_SHORT).show();
-
                 return  false;
             }
+    }
+
+    String getRole(String username){
+        Cursor mcCursor = null;
+        String role = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            System.out.println("on get role in my data base helper");
+
+            mcCursor = db.rawQuery("SELECT role FROM my_users WHERE username=?", new String[]{username + ""});
+            if (mcCursor.getCount() > 0) {
+                mcCursor.moveToFirst();
+                role = mcCursor.getString(mcCursor.getColumnIndex("role"));
+            }
+            System.out.println("getting role");
+            return role;
+        }finally {
+            mcCursor.close();
         }
+
+    }
+
 
 
 
@@ -128,6 +147,8 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
 
     Cursor readAllData(){

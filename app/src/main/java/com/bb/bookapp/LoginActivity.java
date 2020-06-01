@@ -33,18 +33,23 @@ public class LoginActivity extends AppCompatActivity {
                 String user = username_input.getText().toString().trim();
                 String pwd = password_input.getText().toString().trim();
                 boolean checkUserNamePwd =   myDB.verifyUser(user,pwd);
-                System.out.println(pwd);
-                System.out.println(user);
+
                 if(checkUserNamePwd == true){
-//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                    startActivity(intent);
+//
                     Toast.makeText(LoginActivity.this,"Successfully Logged In", Toast.LENGTH_LONG).show();
+                    String role = String.valueOf(myDB.getRole(user));
+                    if(role.equalsIgnoreCase("admin") )
+                    { Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+                    startActivity(intent);
+                    }
+
                 }else{
-//                    Intent intent = new Intent(LoginActivity.this, AddActivity.class);
-//                    startActivity(intent);
                     Toast.makeText(LoginActivity.this,"Invalid Username/Password", Toast.LENGTH_LONG).show();
                 }
-
 
 
 

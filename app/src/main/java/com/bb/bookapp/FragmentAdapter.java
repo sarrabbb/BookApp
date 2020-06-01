@@ -1,9 +1,9 @@
 package com.bb.bookapp;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +11,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
-    private Context context;
+public class FragmentAdapter  extends RecyclerView.Adapter<FragmentAdapter.MyViewHolder>
+{
     Activity activity;
+    private Context context;
+    Fragment fragment;
     private ArrayList book_id , book_title , book_author , book_pages;
 
 
-    CustomAdapter(Activity activity,Context context,ArrayList book_id ,ArrayList book_title ,ArrayList book_author ,ArrayList book_pages){
+    public FragmentAdapter(Activity activity, Context context,  ArrayList book_id, ArrayList book_title, ArrayList book_author, ArrayList book_pages) {
         this.activity = activity;
         this.context = context;
         this.book_id = book_id;
@@ -30,18 +36,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.book_pages = book_pages;
     }
 
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view =inflater.inflate(R.layout.my_row,parent,false);
-
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-
+    public void onBindViewHolder(@NonNull FragmentAdapter.MyViewHolder holder, final int position) {
         holder.book_id_txt.setText(String.valueOf(book_id.get(position)));
         holder.book_title_txt.setText(String.valueOf(book_title.get(position)));
         holder.book_author_txt.setText(String.valueOf(book_author.get(position)));
@@ -49,15 +54,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,UpdateActivity.class);
-                intent.putExtra("Id",String.valueOf(book_id.get(position)));
-                intent.putExtra("Title",String.valueOf(book_title.get(position)));
-                intent.putExtra("Author",String.valueOf(book_author.get(position)));
-                intent.putExtra("Pages",String.valueOf(book_pages.get(position)));
-                activity.startActivityForResult(intent , 1);
+                BookFragment fragment = new BookFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("Id", String.valueOf(book_id.get(position)));
+                bundle.putString("Title", String.valueOf(book_title.get(position)));
+                bundle.putString("Author", String.valueOf(book_author.get(position)));
+                bundle.putString("Pages", String.valueOf(book_pages.get(position)));
+
+                fragment.setArguments(bundle);
+
+                System.out.println(bundle);
+                FragmentManager manager=((AppCompatActivity)context).getSupportFragmentManager();
+                FragmentTransaction Ft=manager.beginTransaction();
+                Ft.replace(R.id.fragment_container,fragment);
+                Ft.commit();
+                System.out.println(fragment.getArguments().getString("Id"));
             }
         });
-
     }
 
     @Override
@@ -65,9 +78,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return book_id.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView book_id_txt , book_title_txt , book_author_txt , book_pages_txt;
         LinearLayout mainLayout;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,6 +90,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             book_author_txt = itemView.findViewById(R.id.book_author_txt);
             book_pages_txt = itemView.findViewById(R.id.book_pages_txt);
             mainLayout = itemView.findViewById(R.id.mainLayout);
+
 
         }
     }
