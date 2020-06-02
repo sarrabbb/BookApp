@@ -39,8 +39,8 @@ public class BookListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_profile,container,false);
-        recyclerView = v.findViewById(R.id.recyleview);
+        v = inflater.inflate(R.layout.fragment_booklist,container,false);
+        recyclerView = v.findViewById(R.id.recyclerView);
 
         myDB = new MyDataBaseHelper(getActivity());
         book_id = new ArrayList<>();
@@ -52,8 +52,6 @@ public class BookListFragment extends Fragment {
         FragmentAdapter customAdapter = new FragmentAdapter(getActivity(),getContext(), book_id,book_title,book_author,book_pages);
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
 
         book_id_txt = v.findViewById(R.id.book_id_txt);
         book_title_txt = v.findViewById(R.id.book_title_txt);

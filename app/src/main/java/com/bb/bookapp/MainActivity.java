@@ -66,19 +66,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
 
-        void storeDataInArrays(){
-            Cursor cursor = myDB.readAllData();
-            if(cursor.getCount() == 0){
-                Toast.makeText(this,"no data",Toast.LENGTH_SHORT).show();
-            }else{
-                while (cursor.moveToNext()){
-                    book_id.add(cursor.getString(0));
-                    book_title.add(cursor.getString(1));
-                    book_author.add(cursor.getString(2));
-                    book_pages.add(cursor.getString(3));
-                }
+    void storeDataInArrays(){
+        Cursor cursor = myDB.readAllData();
+        if(cursor.getCount() == 0){
+            Toast.makeText(this,"no data",Toast.LENGTH_SHORT).show();
+        }else{
+            while (cursor.moveToNext()){
+                book_id.add(cursor.getString(0));
+                book_title.add(cursor.getString(1));
+                book_author.add(cursor.getString(2));
+                book_pages.add(cursor.getString(3));
             }
         }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.delete_all){
             confirmDialog();
+        }
+
+        if(item.getItemId() == R.id.nav_logout){
+            Intent in = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(in);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

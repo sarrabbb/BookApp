@@ -68,7 +68,6 @@ public class FragmentAdapter  extends RecyclerView.Adapter<FragmentAdapter.MyVie
                 FragmentTransaction Ft=manager.beginTransaction();
                 Ft.replace(R.id.fragment_container,fragment);
                 Ft.commit();
-                System.out.println(fragment.getArguments().getString("Id"));
             }
         });
     }

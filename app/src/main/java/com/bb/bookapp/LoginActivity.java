@@ -1,6 +1,9 @@
 package com.bb.bookapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,14 +40,25 @@ public class LoginActivity extends AppCompatActivity {
                 if(checkUserNamePwd == true){
 //
                     Toast.makeText(LoginActivity.this,"Successfully Logged In", Toast.LENGTH_LONG).show();
+
+                    // put user info
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("username",user);
+//                    bundle.putString("userpwd",pwd);
+//                    ProfileFragment profileFragment = new ProfileFragment();
+//                    profileFragment.setArguments(bundle);
+//                    System.out.println(bundle);
+
+
+                    //redirection
                     String role = String.valueOf(myDB.getRole(user));
                     if(role.equalsIgnoreCase("admin") )
                     { Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                        startActivity(intent);
                     }
                     else{
                         Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-                    startActivity(intent);
+                        startActivity(intent);
                     }
 
                 }else{
@@ -68,4 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
+
 }

@@ -2,6 +2,7 @@ package com.bb.bookapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,10 @@ public class AddActivity extends AppCompatActivity {
                 myDB.addBook(title_input.getText().toString().trim(),
                         author_input.getText().toString().trim(),
                         Integer.valueOf(pages_input.getText().toString().trim()));
+
+//                to refrech data
+                Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

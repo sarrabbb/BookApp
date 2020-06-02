@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -34,9 +35,10 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if (savedInstanceState == null){
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new BookListFragment()).commit();
-                navigationView.setCheckedItem(R.id.nav_profile);
-            }
+//            item selected by default
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new BookListFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_booklist);
+        }
     }
 
     @Override
@@ -46,9 +48,10 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new BookListFragment()).commit();
                 break;
 
-            case R.id.nav_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
-                break;
+            case R.id.nav_logout:
+                Intent in = new Intent(UserActivity.this,LoginActivity.class);
+                startActivity(in);
+                finish();
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

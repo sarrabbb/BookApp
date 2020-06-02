@@ -45,25 +45,4 @@ public class BookFragment extends Fragment {
     }
 
 
-
-
-    void getAndSetInentData(){
-        if(getActivity().getIntent().hasExtra("Id") && getActivity().getIntent().hasExtra("Title") && getActivity().getIntent().hasExtra("Author") && getActivity().getIntent().hasExtra("Pages")  )
-        {
-            // Getting Data from Intent
-            id = getActivity().getIntent().getStringExtra("Id");
-            title = getActivity().getIntent().getStringExtra("Title");
-            author = getActivity().getIntent().getStringExtra("Author");
-            pages = getActivity().getIntent().getStringExtra("Pages");
-
-            // Setting Intent Data.
-            title_input.setText(title);
-            author_input.setText(author);
-            pages_input.setText(pages);
-
-        }else{
-            Toast.makeText(getActivity(),"No Data",Toast.LENGTH_SHORT).show();
-        }
-    }
-
 }

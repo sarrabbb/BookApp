@@ -5,4 +5,10 @@
         android:alphabeticShortcut="always"
         android:icon="@drawable/ic_delete"
         android:title="deleteAll" />
+
+    <item android:id="@+id/nav_logout"
+        android:alphabeticShortcut="always"
+        android:icon="@drawable/ic_logout"
+        android:title="logout"
+        />
 </menu>

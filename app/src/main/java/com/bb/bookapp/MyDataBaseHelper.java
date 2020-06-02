@@ -65,7 +65,7 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
 
 
 
-//    USERS
+    //    USERS
     void addUser(String username, String email ,String role,String pwd){
         SQLiteDatabase db2 = this.getWritableDatabase();
 
@@ -101,12 +101,12 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
         Cursor mCursor = db.rawQuery("Select * from " + TABLE_NAME_2 +" where username=? and pwd = ?", new
                 String[]{username, pwd});
 
-            if(mCursor.getCount() > 0)
-            {
-                return  true;
-            }else{
-                return  false;
-            }
+        if(mCursor.getCount() > 0)
+        {
+            return  true;
+        }else{
+            return  false;
+        }
     }
 
     String getRole(String username){
@@ -114,25 +114,22 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
         String role = "";
         SQLiteDatabase db = this.getWritableDatabase();
         try {
-            System.out.println("on get role in my data base helper");
 
             mcCursor = db.rawQuery("SELECT role FROM my_users WHERE username=?", new String[]{username + ""});
             if (mcCursor.getCount() > 0) {
                 mcCursor.moveToFirst();
                 role = mcCursor.getString(mcCursor.getColumnIndex("role"));
             }
-            System.out.println("getting role");
             return role;
         }finally {
             mcCursor.close();
         }
-
     }
 
 
 
 
-//    books
+    //    books
     void addBook(String title, String author, int pages){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues cv = new ContentValues();
@@ -147,8 +144,6 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
 
     Cursor readAllData(){

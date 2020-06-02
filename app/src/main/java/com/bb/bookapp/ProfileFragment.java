@@ -1,5 +1,7 @@
 package com.bb.bookapp;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +19,12 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View view =  inflater.inflate(R.layout.fragment_profile,container,false);
-        recyclerView = view.findViewById(R.id.recyclerView);
+//        String data = getArguments().getString("user");
+        Bundle data = getArguments();
+        System.out.println(data);
+
         return  view;
     }
 }
