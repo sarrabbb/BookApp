@@ -85,7 +85,6 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 MyDataBaseHelper myDB = new MyDataBaseHelper(UpdateActivity.this);
                 myDB.deleteOneRow(id);
-//               to redirect to the main activity
                 finish();
 
             }

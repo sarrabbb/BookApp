@@ -94,9 +94,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(item.getItemId() == R.id.nav_logout){
-            Intent in = new Intent(MainActivity.this,LoginActivity.class);
-            startActivity(in);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             finish();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

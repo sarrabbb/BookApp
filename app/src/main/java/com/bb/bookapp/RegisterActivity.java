@@ -26,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
         useremail_input = findViewById(R.id.useremail_input);
         password_input = findViewById(R.id.password_input2);
         spinnerRole = findViewById(R.id.spinnerRole);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.usertype,R.layout.support_simple_spinner_dropdown_item);
         spinnerRole.setAdapter(adapter);
 

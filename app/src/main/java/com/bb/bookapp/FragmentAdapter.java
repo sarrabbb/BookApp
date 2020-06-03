@@ -63,7 +63,6 @@ public class FragmentAdapter  extends RecyclerView.Adapter<FragmentAdapter.MyVie
 
                 fragment.setArguments(bundle);
 
-                System.out.println(bundle);
                 FragmentManager manager=((AppCompatActivity)context).getSupportFragmentManager();
                 FragmentTransaction Ft=manager.beginTransaction();
                 Ft.replace(R.id.fragment_container,fragment);

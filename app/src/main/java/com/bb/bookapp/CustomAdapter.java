@@ -33,6 +33,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        LayoutInflater is used to create a new View (or Layout) object from one of your xml layouts.
         LayoutInflater inflater = LayoutInflater.from(context);
         View view =inflater.inflate(R.layout.my_row,parent,false);
 

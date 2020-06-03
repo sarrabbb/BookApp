@@ -38,17 +38,8 @@ public class LoginActivity extends AppCompatActivity {
                 boolean checkUserNamePwd =   myDB.verifyUser(user,pwd);
 
                 if(checkUserNamePwd == true){
-//
+
                     Toast.makeText(LoginActivity.this,"Successfully Logged In", Toast.LENGTH_LONG).show();
-
-                    // put user info
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("username",user);
-//                    bundle.putString("userpwd",pwd);
-//                    ProfileFragment profileFragment = new ProfileFragment();
-//                    profileFragment.setArguments(bundle);
-//                    System.out.println(bundle);
-
 
                     //redirection
                     String role = String.valueOf(myDB.getRole(user));
@@ -64,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(LoginActivity.this,"Invalid Username/Password", Toast.LENGTH_LONG).show();
                 }
-
 
 
             }

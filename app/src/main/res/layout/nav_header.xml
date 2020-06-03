@@ -18,11 +18,13 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="Book Application"
+        android:textColor="@color/colorBlack"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
         android:text="tprojet3231@gmail.com" />
 
 

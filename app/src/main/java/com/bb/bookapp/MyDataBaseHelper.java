@@ -31,6 +31,14 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PWD = "pwd";
 
 
+    //    Constructeur
+    MyDataBaseHelper(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
+    }
+
+
+//    creation des tables
     private  static final String create_books = "CREATE TABLE " + TABLE_NAME_1 +
             " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             COLUMN_TITLE + " TEXT, " +
@@ -43,12 +51,6 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
             COLUMN_USER_EMAIL + " TEXT, " +
             COLUMN_USER_ROLE + " TEXT, " +
             COLUMN_PWD + " TEXT);";
-
-    MyDataBaseHelper(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
-    }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -64,8 +66,8 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     //    USERS
+//    add user to database
     void addUser(String username, String email ,String role,String pwd){
         SQLiteDatabase db2 = this.getWritableDatabase();
 
@@ -76,7 +78,6 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_ROLE,role);
         values.put(COLUMN_PWD,pwd);
 
-
         long result = db2.insert(TABLE_NAME_2,null, values);
         if(result == -1){
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
@@ -85,6 +86,7 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+//    fetch all users
     Cursor readAllUsers(){
         String query = "SELECT * FROM " + TABLE_NAME_2;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -96,6 +98,7 @@ class MyDataBaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+//    Verify is user existes on database
     boolean  verifyUser( String username , String pwd ){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor mCursor = db.rawQuery("Select * from " + TABLE_NAME_2 +" where username=? and pwd = ?", new

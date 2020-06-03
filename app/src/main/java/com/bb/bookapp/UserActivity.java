@@ -48,10 +48,14 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new BookListFragment()).commit();
                 break;
 
-            case R.id.nav_logout:
-                Intent in = new Intent(UserActivity.this,LoginActivity.class);
-                startActivity(in);
+            case R.id.logout:
+                Intent intent = new Intent(UserActivity.this, LoginActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
